@@ -1,6 +1,7 @@
 package com.example.richa_000.landingperformance;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,23 +49,47 @@ public class MainActivity extends AppCompatActivity  {
     }
     public void sendMessage(View v) {
         EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        int myNum;
+        String weight = editText.getText().toString();
+        double myNum;
         try {
-            myNum = Integer.parseInt(message);
-            myNum=myNum+1000;
-            message=(""+myNum); //convert int to str
-        } catch(NumberFormatException nfe) {
+            myNum = Double.parseDouble(weight);
+            //myNum=myNum+1000;
+            myNum=myNum-48000;
+            myNum=myNum/5000;
+
+            weight=(""+myNum); //convert int to str
+            Resources r = getResources();
+            int[] bases = r.getIntArray(R.array.f30_dry_ab3);
+
+            double ref_dist;
+
+            ref_dist =  bases[0]; // get first element of array
+            ref_dist=ref_dist+(myNum*bases[1]);
+            weight=(""+ref_dist);
 
 
-        }
+
+
+            TextView textView1 = (TextView) findViewById(R.id.textView);
+            textView1.setText(weight);
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        } catch(NumberFormatException nfe){
+
+
+       /* Resources r = getResources();
+        int[] bases = r.getIntArray(R.array.f30_dry_ab3);
         TextView textView1 = (TextView) findViewById(R.id.textView);
-        textView1.setText(message);
+        int runway;
+
+        runway =  bases[0]; // get first element of array
+        runway=runway+myNum;
+        message=(""+runway);
+        textView1.setText(message);*/
         //================ Hide Virtual Key Board When  Clicking==================//
 
-        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
 
 //======== Hide Virtual Keyboard =====================//
-    }
+    }}
 }
