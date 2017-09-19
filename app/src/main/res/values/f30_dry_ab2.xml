@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="f30_dry_ab2">
+        <item>5540</item>
+        <item>490</item>
+        <item>-520</item>
+        <item>160</item>
+        <item>-270</item>
+        <item>920</item>
+        <item>-150</item> <!-- must be minus to work!!! -->
+        <item>-150</item>
+        <item>450</item>
+
+
+
+
+
+    </integer-array>
+</resources>

@@ -8,25 +8,39 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import static com.example.richa_000.landingperformance.R.id.textView;
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
 import static java.lang.Math.cos;
+import static java.lang.Math.floor;
 import static java.lang.Math.sin;
 
 
 public class MainActivity extends AppCompatActivity  {
 
 
+private String item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
+                R.array.flaps30brakes, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
 
         final EditText weightText = (EditText) findViewById(R.id.editText);
         weightText.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -84,6 +98,10 @@ public class MainActivity extends AppCompatActivity  {
             Resources r = getResources();
             int[] bases = r.getIntArray(R.array.f30_dry_ab3);
 
+
+
+
+
             double ref_dist,ref_dist1,ref_dist2,ref_dist3,ref_dist4,ref_dist5,ref_dist6,ref_dist7;
 
             ref_dist =  bases[0]; // get first element of array
@@ -99,13 +117,14 @@ public class MainActivity extends AppCompatActivity  {
             ref_dist7=(spdadjustNum/10)*bases[8];
             double windissue;
             windissue=(winddctnNum-(rwdctnNum*10));
-            windissue=cos(windissue);
             windissue=(windissue)*(3.14159265358979/180);
-            //windissue = cos(windissue);
-            if (windissue<1) {
-                windissue = 0;
+            windissue=cos(windissue);
 
-            }
+            //windissue = cos(windissue);
+            //if (windissue<1) {
+         //       windissue = 0;
+
+         //   }
             ref_dist3=(winspeedNum*windissue);
 
                     if (ref_dist3>0) {
@@ -123,8 +142,9 @@ public class MainActivity extends AppCompatActivity  {
 
 
             ref_dist=ref_dist+ref_dist1+ref_dist2+ref_dist3+ref_dist7;
-
-            weight=(""+ref_dist);
+           // ref_dist=floor(ref_dist);
+            int i = (int) ref_dist;
+            weight=(""+i);
 
 
 
@@ -151,4 +171,6 @@ public class MainActivity extends AppCompatActivity  {
 
 //======== Hide Virtual Keyboard =====================//
     }}
-}
+
+
+    }
