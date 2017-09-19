@@ -30,6 +30,7 @@
         android:ems="10"
         android:hint="Weight"
         android:inputType="number"
+        android:text="50000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editText2" />
 
@@ -42,6 +43,7 @@
         android:ems="10"
         android:hint="Temperature"
         android:inputType="number"
+        android:text="20"
         app:layout_constraintBottom_toBottomOf="@+id/editText"
         app:layout_constraintLeft_toRightOf="@+id/editText2"
         tools:layout_constraintBottom_creator="1"
@@ -60,7 +62,6 @@
         app:layout_constraintHorizontal_bias="0.049" />
 
 
-
     <EditText
         android:id="@+id/editText2"
         android:layout_width="81dp"
@@ -71,6 +72,7 @@
         android:ems="10"
         android:hint="Elevation"
         android:inputType="number"
+        android:text="500"
         app:layout_constraintLeft_toRightOf="@+id/editText"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -134,11 +136,12 @@
         android:layout_width="100dp"
         android:layout_height="48dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Spd adjust"
         android:inputType="number"
+        android:text="10"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
 </android.support.constraint.ConstraintLayout>

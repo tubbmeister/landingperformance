@@ -13,6 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import static com.example.richa_000.landingperformance.R.id.textView;
+import static java.lang.Math.PI;
+import static java.lang.Math.abs;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity  {
             double ref_dist,ref_dist1,ref_dist2,ref_dist3,ref_dist4,ref_dist5,ref_dist6,ref_dist7;
 
             ref_dist =  bases[0]; // get first element of array
-            ref_dist=ref_dist+(myNum*bases[1]);
+            ref_dist=ref_dist+(((myNum-48000)/5000)*bases[1]);
             ref_dist1=(elevationNum/1000)*bases[3];
             ref_dist2=(15-(elevationNum/1000)*2)-(tempNum);
             if (ref_dist2>0) {
@@ -93,10 +97,32 @@ public class MainActivity extends AppCompatActivity  {
                 ref_dist2 = (ref_dist2 / 10) * bases[6];
             }
             ref_dist7=(spdadjustNum/10)*bases[8];
+            double windissue;
+            windissue=(winddctnNum-(rwdctnNum*10));
+            windissue=cos(windissue);
+            windissue=(windissue)*(3.14159265358979/180);
+            //windissue = cos(windissue);
+            if (windissue<1) {
+                windissue = 0;
+
+            }
+            ref_dist3=(winspeedNum*windissue);
+
+                    if (ref_dist3>0) {
+
+                            ref_dist3=(ref_dist3/10) * bases[4];
+
+
+                    }
+                        else {
+
+                            ref_dist3=(ref_dist3/10) * bases[5];
+                    }
 
 
 
 
+            ref_dist=ref_dist+ref_dist1+ref_dist2+ref_dist3+ref_dist7;
 
             weight=(""+ref_dist);
 
