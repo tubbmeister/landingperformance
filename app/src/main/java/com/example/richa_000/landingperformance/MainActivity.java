@@ -49,6 +49,15 @@ public class MainActivity extends AppCompatActivity  {
     public void sendMessage(View v) {
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
+        int myNum;
+        try {
+            myNum = Integer.parseInt(message);
+            myNum=myNum+1000;
+            message=(""+myNum); //convert int to str
+        } catch(NumberFormatException nfe) {
+
+
+        }
         TextView textView1 = (TextView) findViewById(R.id.textView);
         textView1.setText(message);
         //================ Hide Virtual Key Board When  Clicking==================//
