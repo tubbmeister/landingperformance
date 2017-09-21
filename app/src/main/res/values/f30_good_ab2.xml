@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="f30_good_ab2">
+        <item>6370</item>
+        <item>560</item>
+        <item>-600</item>
+        <item>180</item>
+        <item>-310</item>
+        <item>-1060</item>
+        <item>-90</item> <!-- must be minus to work!!! -->
+        <item>-140</item>
+        <item>520</item>
+
+
+
+
+
+    </integer-array>
+
+
+</resources>

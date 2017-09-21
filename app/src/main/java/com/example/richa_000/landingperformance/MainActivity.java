@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         weight = ("" + myNum); //convert int to str
         Resources r = getResources();
 
-            for ( ii = 0; ii <= 3; ii++) {
+            for ( ii = 0; ii <= 8; ii++) {
 
                 if (ii == 0) {
                     bases = r.getIntArray(R.array.f30_dry_ab3);
@@ -167,6 +167,26 @@ public class MainActivity extends AppCompatActivity {
 
                 else if (ii == 2) {
                      bases = r.getIntArray(R.array.f30_dry_ab1);
+
+                }
+                else if (ii == 3) {
+                    bases = r.getIntArray(R.array.f30_dry_abmax);
+
+                }
+                else if (ii == 4) {
+                    bases = r.getIntArray(R.array.f30_good_abmax);
+
+                }
+                else if (ii == 5) {
+                    bases = r.getIntArray(R.array.f30_good_ab3);
+
+                }
+                else if (ii == 6) {
+                    bases = r.getIntArray(R.array.f30_good_ab2);
+
+                }
+                else if (ii == 7) {
+                    bases = r.getIntArray(R.array.f30_good_ab1);
 
                 }
                 double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7;
@@ -222,7 +242,26 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView1 = (TextView) findViewById(R.id.textView4);
                 textView1.setText(weight);
             }
-
+            else if (ii==3){
+                TextView textView1 = (TextView) findViewById(R.id.textView9);
+                textView1.setText(weight);
+            }
+            else if (ii==4){
+                TextView textView1 = (TextView) findViewById(R.id.textView13);
+                textView1.setText(weight);
+            }
+            else if (ii==5){
+                TextView textView1 = (TextView) findViewById(R.id.textView12);
+                textView1.setText(weight);
+            }
+            else if (ii==6){
+                TextView textView1 = (TextView) findViewById(R.id.textView11);
+                textView1.setText(weight);
+            }
+            else if (ii==7){
+                TextView textView1 = (TextView) findViewById(R.id.textView10);
+                textView1.setText(weight);
+            }
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
