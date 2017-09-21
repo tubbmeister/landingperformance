@@ -11,7 +11,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,11 +31,34 @@ public class MainActivity extends AppCompatActivity {
     private String item;
     int[] bases;
     int ii;
+    int metric;
+    private CheckBox checkBox;
+    double units = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        addListenerOnChkIos();
+
+
+
+
+
+
+
+
+                // get selected radio button from radioGroup
+
+
+                // find the radiobutton by returned id
+
+
+               ;
+
+
+
 
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -227,7 +252,10 @@ public class MainActivity extends AppCompatActivity {
                 ref_dist = ref_dist + ref_dist1 + ref_dist2 + ref_dist3 + ref_dist7;
                 // ref_dist=floor(ref_dist);
                 int i = (int) ref_dist;
-                weight = ("" + i);
+                double aa = (i/units);
+                int a =(int)Math.round(aa); //get rid of decimal
+                weight = ("" + a); //convert feet to meters
+
 
             if (ii==0) {
                 TextView textView1 = (TextView) findViewById(R.id.textView);
@@ -283,4 +311,26 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-}}
+
+}
+    public void addListenerOnChkIos() {
+
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
+
+        checkBox.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    units=3.28;
+                }
+                else  {
+                    units=1;
+                }
+                sendMessage(v);// run calc again
+            }
+        });
+
+    }
+}

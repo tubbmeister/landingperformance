@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">LandingPerformance</string>
+    <string name="app_name">737 - 300 Landing Performance</string>
+    <string name="check_box_click">send</string>
 </resources>
