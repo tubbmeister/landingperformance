@@ -23,16 +23,17 @@ import static java.lang.Math.floor;
 import static java.lang.Math.sin;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
 
-private String item;
+    private String item;
+    int[] bases;
+    int ii;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -64,7 +65,63 @@ private String item;
 
 
         });
+        final EditText wet = (EditText) findViewById(R.id.editText3);
+        wet.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    wet.setText("", TextView.BufferType.EDITABLE);
+                }
+            }
+
+
+        });
+        final EditText wet1 = (EditText) findViewById(R.id.editText4);
+        wet1.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    wet1.setText("", TextView.BufferType.EDITABLE);
+                }
+            }
+
+
+        });
+        final EditText wet2 = (EditText) findViewById(R.id.editText5);
+        wet2.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    wet2.setText("", TextView.BufferType.EDITABLE);
+                }
+            }
+
+
+        });
+        final EditText wet3 = (EditText) findViewById(R.id.editText6);
+        wet3.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    wet3.setText("", TextView.BufferType.EDITABLE);
+                }
+            }
+
+
+        });
+        final EditText wet4 = (EditText) findViewById(R.id.editText7);
+        wet4.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    wet4.setText("", TextView.BufferType.EDITABLE);
+                }
+            }
+
+
+        });
     }
+
     public void sendMessage(View v) {
         EditText editText = (EditText) findViewById(R.id.editText);
         String weight = editText.getText().toString();
@@ -81,79 +138,94 @@ private String item;
         EditText spdadjustText = (EditText) findViewById(R.id.editText7);
         String spdadjust = spdadjustText.getText().toString();
 
-        double myNum,elevationNum,tempNum,winddctnNum,winspeedNum,rwdctnNum,spdadjustNum;
-        try {
-            myNum = Double.parseDouble(weight);//double because of decimal point
-            elevationNum=Double.parseDouble(elevation);
-            tempNum=Double.parseDouble(temp);
-            winddctnNum=Double.parseDouble(winddctn);
-            winspeedNum=Double.parseDouble(windspeed);
-            rwdctnNum=Double.parseDouble(rwdctn);
-            spdadjustNum=Double.parseDouble(spdadjust);
-            //myNum=myNum+1000;
-           // myNum=myNum-48000;
-           // myNum=myNum/5000;
+        double myNum, elevationNum, tempNum, winddctnNum, winspeedNum, rwdctnNum, spdadjustNum;
 
-            weight=(""+myNum); //convert int to str
-            Resources r = getResources();
-            int[] bases = r.getIntArray(R.array.f30_dry_ab3);
+        myNum = Double.parseDouble(weight);//double because of decimal point
+        elevationNum = Double.parseDouble(elevation);
+        tempNum = Double.parseDouble(temp);
+        winddctnNum = Double.parseDouble(winddctn);
+        winspeedNum = Double.parseDouble(windspeed);
+        rwdctnNum = Double.parseDouble(rwdctn);
+        spdadjustNum = Double.parseDouble(spdadjust);
+        //myNum=myNum+1000;
+        // myNum=myNum-48000;
+        // myNum=myNum/5000;
+
+        weight = ("" + myNum); //convert int to str
+        Resources r = getResources();
+
+            for ( ii = 0; ii <= 3; ii++) {
+
+                if (ii == 0) {
+                    bases = r.getIntArray(R.array.f30_dry_ab3);
+                }
+
+                else if (ii == 1) {
+                    bases = r.getIntArray(R.array.f30_dry_ab2);
+
+                }
+
+                else if (ii == 2) {
+                     bases = r.getIntArray(R.array.f30_dry_ab1);
+
+                }
+                double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7;
+
+                ref_dist = bases[0]; // get first element of array
+                ref_dist = ref_dist + (((myNum - 48000) / 5000) * bases[1]);
+                ref_dist1 = (elevationNum / 1000) * bases[3];
+                ref_dist2 = (15 - (elevationNum / 1000) * 2) - (tempNum);
+                if (ref_dist2 > 0) {
+                    ref_dist2 = (ref_dist2 / 10) * bases[7];
+                } else {
+                    ref_dist2 = (ref_dist2 / 10) * bases[6];
+                }
+                ref_dist7 = (spdadjustNum / 10) * bases[8];
+                double windissue;
+                windissue = (winddctnNum - (rwdctnNum * 10));
+                windissue = (windissue) * (3.14159265358979 / 180);
+                windissue = cos(windissue);
+
+                //windissue = cos(windissue);
+                //if (windissue<1) {
+                //       windissue = 0;
+
+                //   }
+                ref_dist3 = (winspeedNum * windissue);
+
+                if (ref_dist3 > 0) {
+
+                    ref_dist3 = (ref_dist3 / 10) * bases[4];
 
 
+                } else {
+
+                    ref_dist3 = (ref_dist3 / 10) * bases[5];
+                }
 
 
+                ref_dist = ref_dist + ref_dist1 + ref_dist2 + ref_dist3 + ref_dist7;
+                // ref_dist=floor(ref_dist);
+                int i = (int) ref_dist;
+                weight = ("" + i);
 
-            double ref_dist,ref_dist1,ref_dist2,ref_dist3,ref_dist4,ref_dist5,ref_dist6,ref_dist7;
-
-            ref_dist =  bases[0]; // get first element of array
-            ref_dist=ref_dist+(((myNum-48000)/5000)*bases[1]);
-            ref_dist1=(elevationNum/1000)*bases[3];
-            ref_dist2=(15-(elevationNum/1000)*2)-(tempNum);
-            if (ref_dist2>0) {
-                ref_dist2 = (ref_dist2 / 10) * bases[7];
+            if (ii==0) {
+                TextView textView1 = (TextView) findViewById(R.id.textView);
+                textView1.setText(weight);
             }
-                else {
-                ref_dist2 = (ref_dist2 / 10) * bases[6];
+            else if (ii==1){
+                TextView textView1 = (TextView) findViewById(R.id.textView3);
+                textView1.setText(weight);
             }
-            ref_dist7=(spdadjustNum/10)*bases[8];
-            double windissue;
-            windissue=(winddctnNum-(rwdctnNum*10));
-            windissue=(windissue)*(3.14159265358979/180);
-            windissue=cos(windissue);
 
-            //windissue = cos(windissue);
-            //if (windissue<1) {
-         //       windissue = 0;
+            else if (ii==2){
+                TextView textView1 = (TextView) findViewById(R.id.textView4);
+                textView1.setText(weight);
+            }
 
-         //   }
-            ref_dist3=(winspeedNum*windissue);
-
-                    if (ref_dist3>0) {
-
-                            ref_dist3=(ref_dist3/10) * bases[4];
-
-
-                    }
-                        else {
-
-                            ref_dist3=(ref_dist3/10) * bases[5];
-                    }
-
-
-
-
-            ref_dist=ref_dist+ref_dist1+ref_dist2+ref_dist3+ref_dist7;
-           // ref_dist=floor(ref_dist);
-            int i = (int) ref_dist;
-            weight=(""+i);
-
-
-
-
-            TextView textView1 = (TextView) findViewById(R.id.textView);
-            textView1.setText(weight);
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        } catch(NumberFormatException nfe){
+
 
 
        /* Resources r = getResources();
@@ -165,12 +237,11 @@ private String item;
         runway=runway+myNum;
         message=(""+runway);
         textView1.setText(message);*/
-        //================ Hide Virtual Key Board When  Clicking==================//
-
+            //================ Hide Virtual Key Board When  Clicking==================//
 
 
 //======== Hide Virtual Keyboard =====================//
-    }}
 
 
     }
+}}
