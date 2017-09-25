@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,33 +29,22 @@ import static java.lang.Math.sin;
 public class MainActivity extends AppCompatActivity {
 
 
-    private String item;
+    private String flaps;
     int[] bases;
-    int ii;
+    int ii,stop;
     int metric;
     private CheckBox checkBox;
     double units = 1;
+    public RadioGroup radioGroup;
+    private RadioButton flaps30, flaps40, silent,other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //radioGroup = (RadioGroup) findViewById(radioGroup);
         addListenerOnChkIos();
-
-
-
-
-
-
-
-
-                // get selected radio button from radioGroup
-
-
-                // find the radiobutton by returned id
-
-
                ;
 
 
@@ -172,15 +162,34 @@ public class MainActivity extends AppCompatActivity {
         winspeedNum = Double.parseDouble(windspeed);
         rwdctnNum = Double.parseDouble(rwdctn);
         spdadjustNum = Double.parseDouble(spdadjust);
-        //myNum=myNum+1000;
-        // myNum=myNum-48000;
-        // myNum=myNum/5000;
 
-        weight = ("" + myNum); //convert int to str
+     //  int selectedId = radioGroup.getCheckedRadioButtonId();
+        flaps30 = (RadioButton) findViewById(R.id.radioButton);
+        flaps40 = (RadioButton) findViewById(R.id.radioButton2);
+        if(flaps30.isChecked()) {
+            flaps = "thirty";
+            // textView.setText("You chose 'Sound' option");
+        }
+
+         else if (flaps40.isChecked())   {
+            flaps = "forty";
+        }
+
+        if (flaps.equals("thirty")) {
+            ii = 0;
+            stop=0;
+        }
+        else {
+            ii = 8;
+
+
+    }
+               weight = ("" + myNum); //convert int to str
         Resources r = getResources();
 
-            for ( ii = 0; ii <= 8; ii++) {
+            for ( ii = 0; ii <= 16; ii++) {
 
+                stop++;
                 if (ii == 0) {
                     bases = r.getIntArray(R.array.f30_dry_ab3);
                 }
@@ -214,6 +223,38 @@ public class MainActivity extends AppCompatActivity {
                     bases = r.getIntArray(R.array.f30_good_ab1);
 
                 }
+                else if (ii == 8) {
+                    bases = r.getIntArray(R.array.f40_dry_ab3);
+
+               }
+                else if (ii == 9) {
+                    bases = r.getIntArray(R.array.f40_dry_ab2);
+
+                }
+                else if (ii == 10) {
+                    bases = r.getIntArray(R.array.f40_dry_ab1);
+
+                }
+                else if (ii == 11) {
+                    bases = r.getIntArray(R.array.f40_dry_abmax);
+
+                }
+                else if (ii == 12) {
+                    bases = r.getIntArray(R.array.f40_good_abmax);
+
+                }
+                else if (ii == 13) {
+                    bases = r.getIntArray(R.array.f40_good_ab3);
+
+                }
+                else if (ii == 14) {
+                    bases = r.getIntArray(R.array.f40_good_ab2);
+
+                }
+                else if (ii == 15) {
+                    bases = r.getIntArray(R.array.f40_good_ab1);
+
+                }
                 double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7;
 
                 ref_dist = bases[0]; // get first element of array
@@ -231,11 +272,7 @@ public class MainActivity extends AppCompatActivity {
                 windissue = (windissue) * (3.14159265358979 / 180);
                 windissue = cos(windissue);
 
-                //windissue = cos(windissue);
-                //if (windissue<1) {
-                //       windissue = 0;
 
-                //   }
                 ref_dist3 = (winspeedNum * windissue);
 
                 if (ref_dist3 > 0) {
@@ -290,25 +327,52 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView1 = (TextView) findViewById(R.id.textView10);
                 textView1.setText(weight);
             }
+             else   if (ii==8) {
+                    TextView textView1 = (TextView) findViewById(R.id.textView);
+                    textView1.setText(weight);
+                }
+                else if (ii==9){
+                    TextView textView1 = (TextView) findViewById(R.id.textView3);
+                    textView1.setText(weight);
+                }
+
+                else if (ii==10){
+                    TextView textView1 = (TextView) findViewById(R.id.textView4);
+                    textView1.setText(weight);
+                }
+                else if (ii==11){
+                    TextView textView1 = (TextView) findViewById(R.id.textView9);
+                    textView1.setText(weight);
+                }
+                else if (ii==12){
+                    TextView textView1 = (TextView) findViewById(R.id.textView13);
+                    textView1.setText(weight);
+                }
+                else if (ii==13){
+                    TextView textView1 = (TextView) findViewById(R.id.textView12);
+                    textView1.setText(weight);
+                }
+                else if (ii==14){
+                    TextView textView1 = (TextView) findViewById(R.id.textView11);
+                    textView1.setText(weight);
+                }
+                else if (ii==15){
+                    TextView textView1 = (TextView) findViewById(R.id.textView10);
+                    textView1.setText(weight);
+                }
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
 
 
-       /* Resources r = getResources();
-        int[] bases = r.getIntArray(R.array.f30_dry_ab3);
-        TextView textView1 = (TextView) findViewById(R.id.textView);
-        int runway;
 
-        runway =  bases[0]; // get first element of array
-        runway=runway+myNum;
-        message=(""+runway);
-        textView1.setText(message);*/
             //================ Hide Virtual Key Board When  Clicking==================//
 
 
 //======== Hide Virtual Keyboard =====================//
-
+        if (stop==8) {
+            ii=16;
+        }
 
     }
 
