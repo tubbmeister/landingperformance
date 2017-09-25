@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer-array name="f40_dry_abmax">
-        <item>4640</item>
-        <item>360</item>
-        <item>-380</item>
-        <item>120</item>
-        <item>-210</item>
-        <item>-700</item>
-        <item>-120</item> <!-- must be minus to work!!! -->
+        <item>3200</item>
+        <item>260</item>
+        <item>-220</item>
+        <item>70</item>
         <item>-120</item>
-        <item>490</item>
+        <item>-410</item>
+        <item>-70</item> <!-- must be minus to work!!! -->
+        <item>-70</item>
+        <item>320</item>
 
 
 

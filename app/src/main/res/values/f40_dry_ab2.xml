@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer-array name="f40_dry_ab2">
-        <item>4640</item>
-        <item>360</item>
-        <item>-380</item>
-        <item>120</item>
-        <item>-210</item>
-        <item>-700</item>
-        <item>-120</item> <!-- must be minus to work!!! -->
-        <item>-120</item>
-        <item>490</item>
+        <item>5250</item>
+        <item>520</item>
+        <item>-480</item>
+        <item>150</item>
+        <item>-260</item>
+        <item>-890</item>
+        <item>-140</item> <!-- must be minus to work!!! -->
+        <item>-140</item>
+        <item>420</item>
 
 
 
