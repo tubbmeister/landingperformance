@@ -1,7 +1,9 @@
 package com.example.richa_000.landingperformance;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.richa_000.landingperformance.R.id.textView;
 import static java.lang.Math.PI;
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    weightText.setText("", TextView.BufferType.EDITABLE);
+                    weightText.setText("", TextView.BufferType.EDITABLE); //clears text on press
                 }
             }
 
@@ -155,6 +158,17 @@ public class MainActivity extends AppCompatActivity {
 
         double myNum, elevationNum, tempNum, winddctnNum, winspeedNum, rwdctnNum, spdadjustNum;
 
+        String strUserName=editText.getText().toString();
+        if (strUserName.trim().equals("")) { //shows "Enter data" if nothing in first editText box
+            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+
+                    Toast.LENGTH_SHORT).show();
+            return; //quits method
+        }
+
+
+
+
         myNum = Double.parseDouble(weight);//double because of decimal point
         elevationNum = Double.parseDouble(elevation);
         tempNum = Double.parseDouble(temp);
@@ -184,6 +198,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
                weight = ("" + myNum); //convert int to str
         Resources r = getResources();
 
@@ -396,5 +413,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Rich's Landing Calculator..")
+                .setMessage("Are you sure you want to close this activity?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
