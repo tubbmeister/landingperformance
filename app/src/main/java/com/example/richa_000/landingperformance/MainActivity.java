@@ -2,10 +2,13 @@ package com.example.richa_000.landingperformance;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.editText);
         String weight = editText.getText().toString();
         if (weight.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -153,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
         String elevation = elevnText.getText().toString();
         if (elevation.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -161,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         EditText tempText = (EditText) findViewById(R.id.editText3);
         String temp = tempText.getText().toString();
         if (temp.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -169,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
         EditText winddctnText = (EditText) findViewById(R.id.editText4);
         String winddctn = winddctnText.getText().toString();
         if (winddctn.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -177,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         EditText windspeedtext = (EditText) findViewById(R.id.editText5);
         String windspeed = windspeedtext.getText().toString();
         if (windspeed.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         EditText rwText = (EditText) findViewById(R.id.editText6);
         String rwdctn = rwText.getText().toString();
         if (rwdctn.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -193,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         EditText spdadjustText = (EditText) findViewById(R.id.editText7);
         String spdadjust = spdadjustText.getText().toString();
         if (spdadjust.trim().equals("")) { //shows "Enter data" if nothing in first editText box
-            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
                     Toast.LENGTH_SHORT).show();
             return; //quits method
@@ -467,5 +470,27 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.my_option_menu, menu);//Menu Resource, Menu
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.about:
+                Intent intent1 = new Intent(this,About.class);
+                this.startActivity(intent1);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
     }
 }
