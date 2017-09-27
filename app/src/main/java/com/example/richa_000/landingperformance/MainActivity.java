@@ -143,6 +143,12 @@ public class MainActivity extends AppCompatActivity {
     public void sendMessage(View v) {
         EditText editText = (EditText) findViewById(R.id.editText);
         String weight = editText.getText().toString();
+        if (weight.trim().equals("")) { //shows "Enter data" if nothing in first editText box
+            Toast.makeText(getApplicationContext(), "Enter all data boxes filled!!",
+
+                    Toast.LENGTH_SHORT).show();
+            return; //quits method
+        }
         EditText elevnText = (EditText) findViewById(R.id.editText2);
 
         String elevation = elevnText.getText().toString();
