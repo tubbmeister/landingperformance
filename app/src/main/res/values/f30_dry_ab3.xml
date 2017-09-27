@@ -10,6 +10,10 @@
         <item>-120</item> <!-- must be minus to work!!! -->
         <item>-120</item>
         <item>490</item>
+        <item>-20</item><!-- % slope -->
+        <item>-30</item>
+        <item>40</item>  <!-- 1 t/r -->
+        <item>50</item>  <!-- 0 t/r -->
 
 
 

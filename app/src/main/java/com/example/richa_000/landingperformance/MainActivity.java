@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     int metric;
     private CheckBox checkBox;
     double units = 1;
-    public RadioGroup radioGroup;
-    private RadioButton flaps30, flaps40, silent,other;
+    public RadioGroup radioGroup, radioGroup1;
+    private RadioButton flaps30, flaps40, tr2,tr1,tr0,other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +130,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        final EditText wet5 = (EditText) findViewById(R.id.editText11);
+        wet3.setOnFocusChangeListener(new OnFocusChangeListener() {
+
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    wet3.setText("", TextView.BufferType.EDITABLE);
+                }
+            }
+
+
+        });
         final EditText wet4 = (EditText) findViewById(R.id.editText7);
         wet4.setOnFocusChangeListener(new OnFocusChangeListener() {
 
@@ -201,8 +212,15 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return; //quits method
         }
+        EditText slopeText = (EditText) findViewById(R.id.editText11);
+        String slopeAdjust = slopeText.getText().toString();
+        if (slopeAdjust.trim().equals("")) { //shows "Enter data" if nothing in first editText box
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
 
-        double myNum, elevationNum, tempNum, winddctnNum, winspeedNum, rwdctnNum, spdadjustNum;
+                    Toast.LENGTH_SHORT).show();
+            return; //quits method
+        }
+        double myNum, elevationNum, tempNum, winddctnNum, winspeedNum, rwdctnNum, spdadjustNum,slopeAdjustNum,trNum;
 
 
 
@@ -216,6 +234,7 @@ public class MainActivity extends AppCompatActivity {
         winspeedNum = Double.parseDouble(windspeed);
         rwdctnNum = Double.parseDouble(rwdctn);
         spdadjustNum = Double.parseDouble(spdadjust);
+        slopeAdjustNum = Double.parseDouble(slopeAdjust);
 
      //  int selectedId = radioGroup.getCheckedRadioButtonId();
         flaps30 = (RadioButton) findViewById(R.id.radioButton);
@@ -239,8 +258,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+        tr2 = (RadioButton) findViewById(R.id.radioButton4);
+        tr1 = (RadioButton) findViewById(R.id.radioButton5);
+        tr0 = (RadioButton) findViewById(R.id.radioButton3);
+        trNum=1;
+            if (tr2.isChecked()){   //obtain tr state
+                trNum=1;
+            }
+            else if (tr1.isChecked())   {
+                trNum=2;
+            }
+            else if (tr0.isChecked())   {
+                trNum=3;
+            }
 
 
+        //trNum = Double.parseDouble(spdadjust);
                weight = ("" + myNum); //convert int to str
         Resources r = getResources();
 
@@ -312,12 +345,36 @@ public class MainActivity extends AppCompatActivity {
                     bases = r.getIntArray(R.array.f40_good_ab1);
 
                 }
-                double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7;
+                double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7,ref_dist8,ref_dist9;
 
                 ref_dist = bases[0]; // get first element of array
                 ref_dist = ref_dist + (((myNum - 48000) / 5000) * bases[1]);
                 ref_dist1 = (elevationNum / 1000) * bases[3];
                 ref_dist2 = (15 - (elevationNum / 1000) * 2) - (tempNum);
+
+
+
+                ref_dist8=slopeAdjustNum;
+                if (ref_dist8 > 0) {
+                    ref_dist8 = (ref_dist8  * bases[9]);
+                } else {
+                    ref_dist8 = (ref_dist8  * bases[10]);
+                }
+
+
+
+                ref_dist9=0;
+
+                if (trNum==1) {
+                    ref_dist9=0;   //ref_dist9 = tr correction
+                }
+                    else if (trNum==2){
+                    ref_dist9=(bases[11]);
+                }
+
+                    else if (trNum==3){
+                    ref_dist9=(bases[12]);
+                }
                 if (ref_dist2 > 0) {
                     ref_dist2 = (ref_dist2 / 10) * bases[7];
                 } else {
@@ -343,7 +400,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                ref_dist = ref_dist + ref_dist1 + ref_dist2 + ref_dist3 + ref_dist7;
+                ref_dist = ref_dist + ref_dist1 + ref_dist2 + ref_dist3 + ref_dist7+ref_dist8+ref_dist9;
                 // ref_dist=floor(ref_dist);
                 int i = (int) ref_dist;
                 double aa = (i/units);
@@ -432,7 +489,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+        Toast.makeText(getApplicationContext(), "Press \""+"GO" + "\" again if change flaps or T/R settings",
 
+                Toast.LENGTH_LONG).show();
 }
     public void addListenerOnChkIos() {
 
