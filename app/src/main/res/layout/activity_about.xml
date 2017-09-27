@@ -14,7 +14,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
-        android:text="This app is purely a training aid for calulating required landing distance and should not be used for flight safety critical operations."
+        android:text="This app is purely a training aid for calculating required landing distance and should not be relied upon for operational planning."
         android:textAllCaps="false"
         android:textColor="@color/colorAccent"
         android:textSize="18sp"

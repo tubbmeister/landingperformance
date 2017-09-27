@@ -489,7 +489,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-        Toast.makeText(getApplicationContext(), "Press \""+"GO" + "\" again if change flaps or T/R settings",
+        Toast.makeText(getApplicationContext(), "Press \""+"Calculate!" + "\" again if Flaps or T/R settings changed",
 
                 Toast.LENGTH_LONG).show();
 }
