@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                     bases = r.getIntArray(R.array.f40_good_ab1);
 
                 }
-                double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7,ref_dist8,ref_dist9;
+                double ref_dist, ref_dist1, ref_dist2, ref_dist3, ref_dist4, ref_dist5, ref_dist6, ref_dist7,ref_dist8,ref_dist9,cross;
 
                 ref_dist = bases[0]; // get first element of array
                 ref_dist = ref_dist + (((myNum - 48000) / 5000) * bases[1]);
@@ -381,13 +381,28 @@ public class MainActivity extends AppCompatActivity {
                     ref_dist2 = (ref_dist2 / 10) * bases[6];
                 }
                 ref_dist7 = (spdadjustNum / 10) * bases[8];
-                double windissue;
+                double windissue,windissue1;
                 windissue = (winddctnNum - (rwdctnNum * 10));
                 windissue = (windissue) * (3.14159265358979 / 180);
+                windissue1=windissue;
                 windissue = cos(windissue);
 
 
                 ref_dist3 = (winspeedNum * windissue);
+                windissue1 = sin(windissue1);
+                cross=windissue1*winspeedNum;
+                TextView textView19 = (TextView) findViewById(R.id.textView19);
+                TextView textView18 = (TextView) findViewById(R.id.textView18);
+                TextView textView16 = (TextView) findViewById(R.id.textView16);
+                TextView textView17 = (TextView) findViewById(R.id.textView17);
+                int b =(int)Math.round(ref_dist3); //get rid of decimal
+
+                int c =(int)Math.round(cross); //get rid of decimal
+                c=abs(c);
+                textView19.setText(""+c); //show crosswind component
+                textView18.setVisibility(View.VISIBLE);
+                textView16.setText(""+b); //show headwind component
+                textView17.setVisibility(View.VISIBLE);
 
                 if (ref_dist3 > 0) {
 
@@ -403,9 +418,9 @@ public class MainActivity extends AppCompatActivity {
                 ref_dist = ref_dist + ref_dist1 + ref_dist2 + ref_dist3 + ref_dist7+ref_dist8+ref_dist9;
                 // ref_dist=floor(ref_dist);
                 int i = (int) ref_dist;
-                double aa = (i/units);
+                double aa = (i/units);//convert feet to meters
                 int a =(int)Math.round(aa); //get rid of decimal
-                weight = ("" + a); //convert feet to meters
+                weight = ("" + a);
 
 
             if (ii==0) {
