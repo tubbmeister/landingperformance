@@ -508,6 +508,69 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.LENGTH_LONG).show();
 }
+
+
+    public void showWind(View v) {  //allows view of winds only
+
+        EditText winddctnText = (EditText) findViewById(R.id.editText4);
+        String winddctn = winddctnText.getText().toString();
+        if (winddctn.trim().equals("")) { //shows "Enter data" if nothing in first editText box
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
+
+                    Toast.LENGTH_SHORT).show();
+            return; //quits method
+
+        }
+        EditText windspeedtext = (EditText) findViewById(R.id.editText5);
+        String windspeed = windspeedtext.getText().toString();
+        if (windspeed.trim().equals("")) { //shows "Enter data" if nothing in first editText box
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
+
+                    Toast.LENGTH_SHORT).show();
+            return; //quits method
+        }
+        EditText rwText = (EditText) findViewById(R.id.editText6);
+        String rwdctn = rwText.getText().toString();
+        if (rwdctn.trim().equals("")) { //shows "Enter data" if nothing in first editText box
+            Toast.makeText(getApplicationContext(), "Ensure all data boxes filled!!",
+
+                    Toast.LENGTH_SHORT).show();
+            return; //quits method
+        }
+        double winddctnNum,winspeedNum,rwdctnNum;
+
+        winddctnNum = Double.parseDouble(winddctn);
+        winspeedNum = Double.parseDouble(windspeed);
+        rwdctnNum = Double.parseDouble(rwdctn);
+
+        double windissue,windissue1,ref_dist3,cross;
+        windissue = (winddctnNum - (rwdctnNum * 10));
+        windissue = (windissue) * (3.14159265358979 / 180);
+        windissue1=windissue;
+        windissue = cos(windissue);
+
+
+        ref_dist3 = (winspeedNum * windissue);
+        windissue1 = sin(windissue1);
+        cross=windissue1*winspeedNum;
+        TextView textView19 = (TextView) findViewById(R.id.textView19);
+        TextView textView18 = (TextView) findViewById(R.id.textView18);
+        TextView textView16 = (TextView) findViewById(R.id.textView16);
+        TextView textView17 = (TextView) findViewById(R.id.textView17);
+        int b =(int)Math.round(ref_dist3); //get rid of decimal
+
+        int c =(int)Math.round(cross); //get rid of decimal
+        c=abs(c);
+        textView19.setText(""+c); //show crosswind component
+        textView18.setVisibility(View.VISIBLE);
+        textView16.setText(""+b); //show headwind component
+        textView17.setVisibility(View.VISIBLE);
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow((null == getCurrentFocus()) ? null : getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            //================ Hide Virtual Key Board When  Clicking==================//
+
+    }
     public void addListenerOnChkIos() {
 
         checkBox = (CheckBox) findViewById(R.id.checkBox);
