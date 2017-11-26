@@ -3,6 +3,8 @@ package com.example.richa_000.landingperformance;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.widget.TextView;
+
 public class About extends AppCompatActivity {
 
     @Override
@@ -11,5 +13,11 @@ public class About extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView aboutView = (TextView) findViewById(R.id.textViewVersion);
+        String numberTemp = BuildConfig.VERSION_NAME;
+        aboutView.setText("Version number " + numberTemp);
     }
+
+
+
 }
